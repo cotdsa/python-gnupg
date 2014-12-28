@@ -162,7 +162,7 @@ class GPGBase(object):
         self.keyring = os.path.join(self._homedir, pub)
         self.secring = os.path.join(self._homedir, sec)
         self.options = _parsers._sanitise(options) if options else None
-        self.enable_pka_lookup = enable_pka_lookuo
+        self.enable_pka_lookup = enable_pka_lookup
         #: The version string of our GnuPG binary
         self.binary_version = '0.0.0'
         self.verbose = False
