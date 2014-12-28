@@ -482,7 +482,6 @@ def _get_options_group(group=None):
                              '--list-public-keys',
                              '--list-secret-keys',
                              '--list-sigs',
-                             '--recipient',
                              '--recv-keys',
                              '--send-keys',
                              ])
@@ -530,6 +529,7 @@ def _get_options_group(group=None):
                               '--personal-compress-prefs',
                               '--personal-compress-preferences',
                               '--print-md',
+                              '--recipient',
                               ])
     #: These options expect no arguments
     none_options = frozenset(['--always-trust',
