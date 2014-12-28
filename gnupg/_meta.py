@@ -131,7 +131,7 @@ class GPGBase(object):
                        'packets':  _parsers.ListPackets }
 
     def __init__(self, binary=None, home=None, keyring=None, secring=None,
-                 use_agent=False, default_preference_list=None,
+                 use_agent=False, default_preference_list=None, enable_pka_lookup=False,
                  verbose=False, options=None):
         """Create a ``GPGBase``.
 
@@ -162,7 +162,7 @@ class GPGBase(object):
         self.keyring = os.path.join(self._homedir, pub)
         self.secring = os.path.join(self._homedir, sec)
         self.options = _parsers._sanitise(options) if options else None
-
+        self.enable_pka_lookup = enable_pka_lookuo
         #: The version string of our GnuPG binary
         self.binary_version = '0.0.0'
         self.verbose = False
@@ -521,6 +521,8 @@ class GPGBase(object):
         if self.use_agent: cmd.append('--use-agent')
         else: cmd.append('--no-use-agent')
 
+        if self.enable_pka_lookup:
+          cmd.append('--auto-key-locate pka')
         # The arguments for debugging and verbosity should be placed into the
         # cmd list before the options/args in order to resolve Issue #76:
         # https://github.com/isislovecruft/python-gnupg/issues/76

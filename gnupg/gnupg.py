@@ -59,7 +59,7 @@ class GPG(GPGBase):
     _batch_limit    = 25
 
     def __init__(self, binary=None, homedir=None, verbose=False,
-                 use_agent=False, keyring=None, secring=None,
+                 use_agent=False, enable_pka_lookup=False, keyring=None, secring=None,
                  options=None):
         """Initialize a GnuPG process wrapper.
 
@@ -117,7 +117,8 @@ class GPG(GPGBase):
             secring=secring,
             options=options,
             verbose=verbose,
-            use_agent=use_agent,)
+            use_agent=use_agent,
+            enable_pka_lookup=enable_pka_lookup,)
 
         log.info(textwrap.dedent("""
         Initialised settings:
@@ -131,6 +132,7 @@ class GPG(GPGBase):
         options: %s
         verbose: %s
         use_agent: %s
+        enable_pka_lookup: %s
         """ % (self.binary,
                self.binary_version,
                self.homedir,
@@ -139,7 +141,8 @@ class GPG(GPGBase):
                self.default_preference_list,
                self.keyserver, self.options,
                str(self.verbose),
-               str(self.use_agent))))
+               str(self.use_agent),
+               str(self.enable_pka_lookup))))
 
         self._batch_dir = os.path.join(self.homedir, 'batch-files')
         self._key_dir  = os.path.join(self.homedir, 'generated-keys')
