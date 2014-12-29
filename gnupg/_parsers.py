@@ -848,7 +848,7 @@ class GenKey(object):
 
         :raises: :exc:`~exceptions.ValueError` if the status message is unknown.
         """
-        if key in ("GOOD_PASSPHRASE"):
+        if key in ("GOOD_PASSPHRASE", "NEED_PASSPHRASE_PIN"):
             pass
         elif key == "KEY_NOT_CREATED":
             self.status = 'key not created'
