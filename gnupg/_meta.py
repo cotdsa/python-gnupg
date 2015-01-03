@@ -574,9 +574,13 @@ class GPGBase(object):
         else:
             expand_shell = False
 
+        env = { 'LANGUAGE': 'en' }
+        if self.use_agent and 'GPG_AGENT_INFO' in os.environ:
+          env['GPG_AGENT_INFO'] = os.environ['GPG_AGENT_INFO']
+
         return subprocess.Popen(cmd, shell=expand_shell, stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                env={'LANGUAGE': 'en'})
+                                env=env)
 
     def _read_response(self, stream, result):
         """Reads all the stderr output from GPG, taking notice only of lines
